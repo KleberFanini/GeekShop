@@ -1,0 +1,129 @@
+<div class="min-h-screen flex flex-col bg-[#14141c]">
+    <app-navbar></app-navbar>
+    <section class="gradient-hero py-20 relative overflow-hidden mt-16">
+        <div class="absolute inset-0 opacity-10 bg-[#522399]">
+            <div class="absolute top-20 left-20 w-64 h-64 bg-[#5915bf] rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-20 w-80 h-80 bg-[#703ac2] rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10 text-center">
+
+            <h1 class="text-5xl font-bold mb-4 text-white">Ligas e Eventos TCG</h1>
+            <p class="text-xl text-[#a0a0a0] max-w-2xl mx-auto">
+                Participe dos melhores torneios e eventos de TCG. Inscreva-se agora e mostre suas habilidades!
+            </p>
+        </div>
+    </section>
+
+    <!-- Seção de Ligas -->
+    <section class="container mx-auto px-4 py-20">
+        <div class="flex items-center justify-between mb-12">
+            <div class="flex items-center space-x-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-8 text-[#7444BC]">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                </svg>
+                <h2 class="text-3xl font-bold text-white">Eventos Disponíveis</h2>
+            </div>
+            <button
+                class="border border-[#7444BC] text-[#7444BC] font-bold px-4 py-2 rounded-xl hover:bg-[#7444BC] hover:text-white hover:shadow-[0_0_15px_rgba(116,68,188,0.7)]">
+                Ver Calendário Completo
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @for (liga of ligas; track liga.titulo) {
+            <div
+                class="border border-[#474752] rounded-2xl bg-[#24242c] p-6 hover:shadow-[0_0_15px_rgba(116,68,188,0.7)] transition-all duration-300">
+                <h3 class="font-bold text-xl mb-2 text-white">{{ liga.titulo }}</h3>
+                <p class="text-sm mb-2 px-2 py-0.5 font-bold rounded-xl inline-block"
+                    [ngClass]="getTcgColorClass(liga.tcg)">{{ liga.tcg }}</p>
+                <p class="text-[#a0a0a0] flex items-center space-x-2 mt-2 gap-2">
+                    <strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6 text-[#7444BC]">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                        </svg>
+                    </strong>
+                    {{ liga.data }}
+                </p>
+                <p class="text-[#a0a0a0] flex items-center space-x-5 mt-2 gap-2">
+                    <strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6 text-[#7444BC]">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                        </svg>
+                    </strong>
+                    {{ liga.local }}
+                </p>
+                <p class="text-[#a0a0a0] flex items-center space-x-5 mt-2 gap-2">
+                    <strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6 text-[#7444BC]">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                        </svg>
+                    </strong>
+                    {{ liga.participantes }}/{{ liga.maxParticipantes}}
+                </p>
+                <div class="mt-4 bg-[#383845] rounded-lg p-2">
+                    <p class="text-[#a0a0a0] font-bold">Prêmio:</p>
+                    <p class="text-[#7444BC] font-bold">{{ liga.premiacao }}</p>
+                </div>
+                <button class="w-full border border-primary text-[#7444BC] 
+                    flex items-center justify-center space-x-3 
+                    px-6 py-3 rounded-lg hover:bg-[#7444BC] hover:text-white 
+                    transition font-bold hover:scale-105 hover:shadow-[0_0_15px_rgba(116,68,188,0.7)] 
+                    mt-4"
+                >
+                    Inscrever-se
+                </button>
+            </div>
+            } @empty {
+            <p class="text-white col-span-full text-center py-8">Nenhuma liga encontrada.</p>
+            }
+        </div>
+    </section>
+
+    <!-- Seção de Informação -->
+    <section class="container mx-auto px-4 py-16">
+        <div class="bg-[#24242c] border border-[#474752] rounded-2xl p-8">
+            <h2 class="text-4xl font-bold mb-6 text-white">Como Participar</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-lg gradient-[to_right,#7444BC,#474752] flex items-center justify-center text-xl font-bold glow-primary text-white bg-[#7444BC] shadow-[0_0_15px_rgba(116,68,188,0.7)]">
+                        1
+                    </div>
+                    <h3 class="font-semibold text-white text-2xl">Escolha o Evento</h3>
+                    <p class="text-[#a0a0a0]">
+                        Navegue pela nossa lista de eventos e escolha aquele que mais combina com você. Cada evento tem sua própria regra e premiação.
+                    </p>
+                </div>
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-lg gradient-[to_right,#7444BC,#474752] flex items-center justify-center text-xl font-bold glow-primary text-white bg-[#7444BC] shadow-[0_0_15px_rgba(116,68,188,0.7)]">
+                        2
+                    </div>
+                    <h3 class="font-semibold text-white text-2xl">Faça sua Inscrição</h3>
+                    <p class="text-[#a0a0a0]">
+                        Clique em "Inscrever-se" e complete o formulário de inscrição.
+                    </p>
+                </div>
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-lg gradient-[to_right,#7444BC,#474752] flex items-center justify-center text-xl font-bold glow-primary text-white bg-[#7444BC] shadow-[0_0_15px_rgba(116,68,188,0.7)]">
+                        3
+                    </div>
+                    <h3 class="font-semibold text-white text-2xl">Participe e Ganhe</h3>
+                    <p class="text-[#a0a0a0]">
+                        Compareça no dia do evento e dispute incríveis prêmios!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <app-footer></app-footer>
+</div>

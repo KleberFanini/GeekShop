@@ -1,0 +1,138 @@
+<div
+    class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#1c1424] to-[#1c1c2c]">
+
+    <!-- Background effects -->
+    <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-20 left-20 w-64 h-64 bg-yellow-500 rounded-full blur-3xl"></div>
+        <div class="absolute top-40 right-40 w-80 h-80 bg-blue-500 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 left-1/2 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-md mx-auto">
+            <!-- Logo -->
+            <a routerLink="home" class="flex items-center justify-center space-x-2 mb-8 group">
+                <div
+                    class="w-12 h-12 rounded-lg flex items-center justify-center bg-[#7444BC] border-2 border-[#7444BC] transition-all duration-300 group-hover:scale-110 hover:shadow-[0_0_15px_rgba(116,68,188,0.7)]">
+                    <span class="text-2xl font-bold text-white">GS</span>
+                </div>
+
+                <span class="text-2xl font-bold text-white">Geek Shop</span>
+            </a>
+
+            <!-- Tabs -->
+            <div class="w-full mb-4">
+                <div class="grid w-full grid-cols-2 rounded-lg bg-gray-600">
+
+                    <button class="p-1 text-center font-semibold transition-colors flex justify-center items-center"
+                        (click)="setTab('login')">
+                        <span class="py-2 w-full rounded-lg transition-colors" [ngClass]="{
+                    'bg-[#14141c] text-white': activeTab === 'login',
+                    'text-foreground hover:bg-muted/40': activeTab !== 'login'
+                }">
+                            Login
+                        </span>
+                    </button>
+
+                    <button class="p-1 text-center font-semibold transition-colors flex justify-center items-center"
+                        (click)="setTab('register')">
+                        <span class="py-2 w-full rounded-lg transition-colors" [ngClass]="{
+                    'bg-[#14141c] text-white': activeTab === 'register',
+                    'text-foreground hover:bg-muted/40': activeTab !== 'register'
+                }">
+                            Registrar
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <div *ngIf="activeTab === 'login'"
+                class="border border-primary/20 rounded-xl p-6 glow-primary bg-[#24242c] shadow-[0_0_15px_rgba(116,68,188,0.7)]">
+                <h2 class="text-xl font-bold mb-1 text-white">Bem-vindo de volta!</h2>
+                <p class="text-sm text-muted-foreground mb-6 text-[#a0a0a0]">
+                    Entre com sua conta para continuar sua jornada
+                </p>
+
+                <form [formGroup]="loginForm" (ngSubmit)="handleLogin()" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1 text-white" for="email">Email</label>
+                        <input type="email" id="email" formControlName="email" placeholder="seu@email.com"
+                            class="input w-full bg-[#14141c] text-white rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#7444BC]" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1 text-white" for="password">Senha</label>
+                        <input type="password" id="password" formControlName="password" placeholder="••••••••"
+                            class="input w-full bg-[#14141c] text-white rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#7444BC]" />
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-[#7444BC] rounded-xl px-4 py-2 text-white font-bold transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(116,68,188,0.7)] disabled:opacity-50 disabled:cursor-not-allowed"
+                        [disabled]="isLoading">
+                        {{ isLoading ? 'Entrando...' : 'Entrar' }}
+                    </button>
+                </form>
+
+                <div class="text-sm text-muted-foreground text-center mt-4 text-[#a0a0a0]">
+                    Esqueceu sua senha?
+                    <a href="#" class="text-[#7444BC] hover:underline font-medium">Recuperar</a>
+                </div>
+            </div>
+
+            <!-- Register Form -->
+            <div *ngIf="activeTab === 'register'"
+                class="border border-primary/20 rounded-xl p-6 glow-primary bg-[#24242c] shadow-[0_0_15px_rgba(116,68,188,0.7)]">
+                <h2 class="text-xl font-bold mb-1 text-white">Criar Conta</h2>
+                <p class="text-sm text-muted-foreground mb-6 text-[#a0a0a0]">
+                    Junte-se à maior comunidade TCG do Brasil
+                </p>
+
+                <form [formGroup]="registerForm" (ngSubmit)="handleRegister()" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1 text-white" for="name">Nome Completo</label>
+                        <input type="text" id="name" formControlName="name" placeholder="Seu nome"
+                            class="input w-full bg-[#14141c] text-white rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#7444BC]" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1 text-white" for="register-email">Email</label>
+                        <input type="email" id="register-email" formControlName="email" placeholder="seu@email.com"
+                            class="input w-full bg-[#14141c] text-white rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#7444BC]" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1" for="register-password">Senha</label>
+                        <input type="password" id="register-password" formControlName="password" placeholder="••••••••"
+                            class="input w-full bg-[#14141c] text-white rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#7444BC]" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1" for="confirm-password">Confirmar Senha</label>
+                        <input type="password" id="confirm-password" formControlName="confirmPassword"
+                            placeholder="••••••••"
+                            class="input w-full bg-[#14141c] text-white rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#7444BC]" />
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-[#7444BC] rounded-xl px-4 py-2 text-white font-bold transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(116,68,188,0.7)] disabled:opacity-50 disabled:cursor-not-allowed"
+                        [disabled]="isLoading">
+                        {{ isLoading ? 'Criando conta...' : 'Criar Conta' }}
+                    </button>
+                </form>
+
+                <p class="text-xs text-muted-foreground text-center mt-4 text-[#a0a0a0]">
+                    Ao criar uma conta, você concorda com nossos
+                    <a href="#" class="text-primary hover:underline text-[#7444BC]">Termos de Uso</a>.
+                </p>
+            </div>
+
+            <div class="mt-6 text-center">
+                <a routerLink="home"
+                    class="text-sm text-muted-foreground hover:text-[#7444BC] transition-colors text-[#a0a0a0]">
+                    ← Voltar para Home
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

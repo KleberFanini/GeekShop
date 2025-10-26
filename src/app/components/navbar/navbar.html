@@ -1,0 +1,77 @@
+<nav class="fixed top-0 left-0 w-full z-50 border-b border-border backdrop-blur-lg bg-[#24242c]/70">
+
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+
+            <!-- Logo -->
+            <a routerLink="/home" class="flex items-center space-x-2 group">
+                <div
+                    class="w-10 h-10 rounded-lg flex items-center justify-center bg-[#7444BC] border-2 border-[#7444BC] transition-all duration-300 group-hover:scale-110 shadow-[0_0_15px_rgba(116,68,188,0.7)]">
+                    <span class="text-2xl font-bold text-white">GS</span>
+                </div>
+
+                <span class="text-2xl font-bold text-white">Geek Shop</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center justify-center space-x-6 flex-grow">
+                <a *ngFor="let link of navLinks" routerLink="{{ link.path }}"
+                    class="text-lg font-medium transition-colors duration-300 relative group-hover:text-[#7444BC]"
+                    [ngClass]="{
+                'text-[#7444BC]': isActive(link.path),
+                'text-white': !isActive(link.path)}">
+                    {{ link.name }}
+                    <span *ngIf="isActive(link.path)" class="absolute -bottom-4 h-0.5 bg-[#7444BC] 
+                     shadow-[0_0_10px_rgba(116,68,188,0.7)] 
+                     left-1/2 transform -translate-x-1/2 w-full">
+                    </span>
+                </a>
+            </div>
+
+            <!-- Icones -->
+            <div class="flex items-center space-x-2">
+                <!-- Icone de Pesquisa -->
+                <button
+                    class="hidden md:flex p-3 rounded-xl hover:bg-[#7444BC] hover:bg-opacity-80 items-center justify-center transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+                    </svg>
+                </button>
+
+                <!-- Icone Usuário -->
+                <a routerLink="/"
+                    class="p-3 rounded-xl hover:bg-[#7444BC] hover:bg-opacity-80 items-center justify-center transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
+                </a>
+
+                <!-- Icone de Carrinho -->
+                <button
+                    class="relative p-3 rounded-xl border border-[#7444BC] border-2 hover:bg-[#7444BC] hover:bg-opacity-80 items-center justify-center transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                    </svg>
+
+                    <span
+                        class="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center text-white bg-[#7444BC]">0</span>
+                </button>
+            </div>
+
+            <!-- Icone de Menu (Mobile) -->
+            <button class="md:hidden p-2 rounded-full hover:bg-muted" (click)="toggleMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+
+        </div>
+    </div>
+</nav>

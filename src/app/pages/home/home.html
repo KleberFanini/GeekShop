@@ -1,0 +1,178 @@
+<div class="min-h-screen flex flex-col bg-[#14141c]">
+  <app-navbar></app-navbar>
+
+  <section class="relative h-[600px] overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" [style.backgroundImage]="'url(' + banner + ')'">
+      <div class="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent"></div>
+    </div>
+    <div class="container mx-auto px-4 h-full flex items-center relative z-10">
+      <div class="max-w-2xl space-y-6">
+        <div
+          class="inline-flex items-center space-x-2 bg-primary/20 backdrop-blur-sm border border-[#7444BC] rounded-full px-4 py-2 glow-primary shadow-[0_0_15px_rgba(116,68,188,0.7)]">
+          <svg width="25" height="25" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 10L115 60L165 75L115 90L100 140L85 90L35 75L85 60L100 10Z" stroke="#7444BC"
+              stroke-width="4" />
+            <path d="M140 100L147.5 125L172.5 132.5L147.5 140L140 165L132.5 140L107.5 132.5L132.5 125L140 100Z"
+              stroke="#7444BC" stroke-width="4" />
+            <path d="M40 100L47.5 125L72.5 132.5L47.5 140L40 165L32.5 140L7.5 132.5L32.5 125L40 100Z" stroke="#7444BC"
+              stroke-width="4" />
+          </svg>
+          <span class="text-sm font-semibold text-primary text-white">Novidades toda semana!</span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold leading-tight text-white">
+          Sua Loja
+          <span class="block text-primary glow-primary text-[#7444BC]">TCG Oficial</span>
+        </h1>
+        <p class="text-xl text-muted-foreground text-[#a0a0a0]">
+          Pokémon, Yu-Gi-Oh!, Magic e One Piece. As melhores cartas, os melhores preços.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <button routerLink="/catalogo"
+            class="bg-[#7444BC] text-white px-6 py-3 rounded-lg hover:opacity-90 transition font-bold hover:scale-110 hover:shadow-[0_0_15px_rgba(116,68,188,0.7)]">
+            Ver Catálogo →
+          </button>
+          <button routerLink="/ligas"
+            class="border border-primary text-[#7444BC] px-6 py-3 rounded-lg font-bold hover:bg-[#7444BC] hover:text-white hover:shadow-[0_0_15px_rgba(116,68,188,0.7)]">
+            Ligas e Eventos
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Produtos -->
+  <section class="container mx-auto px-4 py-20">
+    <div class="flex items-center justify-between mb-12">
+      <div>
+        <h2 class="text-3xl font-bold text-white text-2xl">Cartas em Destaque</h2>
+        <p class="text-muted-foreground text-[#a0a0a0]">As cartas mais procuradas da semana</p>
+      </div>
+      <button class="text-primary hover:underline text-white">
+        Ver Todas →
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div *ngFor="let product of Produtos"
+        class="hover:border-[#7444BC] border-[#474752] rounded-xl overflow-hidden bg-[#24242c] hover:shadow-[0_0_15px_rgba(116,68,188,0.7)] transition relative">
+
+        <div class="absolute top-3 left-3 p-1.5 rounded-lg 
+                    bg-black/60 text-white text-xs font-semibold 
+                    backdrop-blur-sm z-10">
+          {{ product.tcg }}
+        </div>
+
+        <div class="absolute top-3 right-3 p-1.5 rounded-lg text-white text-xs font-semibold 
+                   backdrop-blur-sm z-10" [ngClass]="getRarityColor(product.raridade)"> {{ product.raridade }}
+        </div>
+
+        <img [src]="product.imagem" alt="{{product.nome}}" class="w-full h-125 object-cover" />
+
+        <div class="p-4">
+          <h3 class="font-bold text-lg text-white">{{ product.nome}}</h3>
+          <p class="text-primary font-bold text-2xl mt-2 text-[#7444BC]">R$ {{ product.preco | number:'1.2-2' }}</p>
+          <button class="w-full border border-primary text-[#7444BC] 
+            flex items-center justify-center space-x-3 
+            px-6 py-3 rounded-lg hover:bg-[#7444BC] hover:text-white 
+            transition font-bold hover:scale-105 hover:shadow-[0_0_15px_rgba(116,68,188,0.7)] mt-6">
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+              stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+            </svg>
+
+            <span>Adicionar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ligas -->
+  <section class="container mx-auto px-4 py-20 bg-gradient-to-b from-transparent via-card/50 to-transparent">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h2 class="text-3xl font-bold mb-2 text-white">Próximas Ligas</h2>
+        <p class="text-muted-foreground text-[#a0a0a0]">Inscreva-se nos torneios e eventos</p>
+      </div>
+      <button class="text-primary hover:underline text-white">Ver Todas →</button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div *ngFor="let ligas of Ligas"
+        class="border border-[#474752] rounded-xl bg-card p-6 shadow-sm bg-[#24242c] hover:shadow-[0_0_15px_rgba(116,68,188,0.7)] transition ">
+        <h3 class="font-bold text-xl mb-2 text-white">{{ ligas.titulo }}</h3>
+        <p class="text-sm text-white mb-2 px-2 py-0.5 font-bold rounded-xl inline-block" [ngClass]="getTcgColorClass(ligas.tcg)">{{ ligas.tcg }}
+        </p>
+        <p class="text-[#a0a0a0] flex items-center space-x-2 mt-2">
+          <strong>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6 text-[#7444BC]">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+            </svg>
+          </strong>
+          {{ ligas.data }}
+        </p>
+        <p class="text-[#a0a0a0] flex items-center space-x-5 mt-2">
+          <strong>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6 text-[#7444BC]">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+            </svg>
+          </strong>
+          {{ ligas.local }}
+        </p>
+        <p class="text-[#a0a0a0] flex items-center space-x-5 mt-2">
+          <strong>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6 text-[#7444BC]">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+            </svg>
+          </strong>
+          {{ ligas.participantes }}/{{ ligas.maxParticipantes}}
+        </p>
+        <div class="mt-4 bg-[#383845] rounded-lg p-2">
+          <p class="text-[#a0a0a0] font-bold">Prêmio:</p>
+          <p class="text-[#7444BC] font-bold">{{ ligas.premiacao }}</p>
+        </div>
+        <button class="w-full border border-primary text-[#7444BC] 
+           flex items-center justify-center space-x-3 
+           px-6 py-3 rounded-lg hover:bg-[#7444BC] hover:text-white 
+           transition font-bold hover:scale-105 hover:shadow-[0_0_15px_rgba(116,68,188,0.7)] 
+           mt-4">
+          Inscrever-se
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container mx-auto px-4 py-20">
+    <div
+      class="bg-gradient-to-br from-[#1c1424] to-[#1c1c2c] rounded-3xl p-12 text-center relative overflow-hidden glow-primary shadow-[0_0_15px_rgba(116,68,188,0.7)] flex flex-col items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="size-25 text-[#7444BC]">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+      </svg>
+
+      <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+        <h2 class="text-4xl font-bold text-white">Comece Sua Coleção Hoje</h2>
+        <p class="text-lg text-muted-foreground text-[#a0a0a0]">
+          Cadastre-se e receba 10% de desconto na primeira compra
+        </p>
+        <button routerLink="/"
+          class="bg-[#7444BC] text-white px-6 py-3 rounded-lg hover:scale-110 hover:shadow-[0_0_15px_rgba(116,68,188,0.7)] transition">
+          Criar Conta Grátis
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div>
