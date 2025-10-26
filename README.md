@@ -46,7 +46,7 @@ O site tem como intuito oferecer uma experiência completa para fãs de TCG e cu
 ### 📦 Instalação
 ```bash
 # Clone este repositório
-git clone https://github.com/KleberFanini/geek-shop.git
+git clone https://github.com/KleberFanini/GeekShop.git
 
 # Acesse a pasta do projeto
 cd GeekShop
